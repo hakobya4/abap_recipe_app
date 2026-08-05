@@ -1,0 +1,36 @@
+@Metadata.layer: #CORE
+@UI.headerInfo:{
+    typeName:       'User',
+    typeNamePlural: 'Users',
+    title:{ type: #STANDARD, value: 'Username' }
+}
+annotate entity ZC_AUTH_USER with
+{
+
+  @UI.facet: [
+      {
+        id: 'UserDetails', purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE, label: 'User Details',
+        position: 10, targetQualifier: 'UserDetails'
+      },
+      {
+        id: 'Sessions', purpose: #STANDARD,
+        type: #LINEITEM_REFERENCE, label: 'Active Session',
+        position: 20, targetElement: '_Session'
+      }
+    ]
+  @UI.lineItem:       [{ position: 10, label: 'Username' }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.fieldGroup:     [{ qualifier: 'UserDetails', position: 10, label: 'Username' }]
+  Username;
+
+  @UI.lineItem:   [{ position: 20, label: 'Registered At' }]
+  @UI.fieldGroup: [{ qualifier: 'UserDetails', position: 20, label: 'Registered At' }]
+  CreatedAt;
+
+  @UI.lineItem: [
+    { position: 30, label: 'Register', type: #FOR_ACTION, dataAction: 'register' },
+    { position: 35, label: 'Login',    type: #FOR_ACTION, dataAction: 'login' }
+  ]
+  UserUuid;
+}

@@ -1,0 +1,8 @@
+@EndUserText.label: 'User authorization'
+@MappingRole: true
+define role ZAUTH_USER {
+  grant
+    select
+  on
+    ZI_AUTH_USER;
+}

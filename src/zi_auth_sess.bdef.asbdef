@@ -1,0 +1,23 @@
+managed implementation in class ZBP_I_AUTH_SESS unique;
+strict ( 2 );
+
+define behavior for ZI_AUTH_SESS alias Session
+persistent table zauth_sess
+lock master
+authorization master ( global )
+{
+  create;
+  delete;
+
+  field ( readonly, numbering : managed ) SessionUuid;
+
+  action logout;
+
+  mapping for zauth_sess
+    {
+      SessionUuid = session_uuid;
+      UserUuid    = user_uuid;
+      CreatedAt   = created_at;
+      ExpiresAt   = expires_at;
+    }
+}

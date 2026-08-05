@@ -1,0 +1,29 @@
+managed implementation in class ZBP_I_AUTH_USER unique;
+strict ( 2 );
+
+define behavior for ZI_AUTH_USER alias User
+persistent table zauth_user
+lock master
+authorization master ( global )
+{
+  create;
+  delete;
+
+  field ( readonly, numbering : managed ) UserUuid;
+  field ( readonly ) CreatedAt;
+  field ( readonly ) PasswordHash, PasswordSalt, HashIterations;
+  field ( mandatory ) Username;
+
+  static action register parameter ZI_AUTH_REGISTER_P result [1] $self;
+  static action login    parameter ZI_AUTH_LOGIN_P    result [1] $self;
+
+  mapping for zauth_user
+    {
+      UserUuid       = user_uuid;
+      Username       = username;
+      PasswordHash   = password_hash;
+      PasswordSalt   = password_salt;
+      HashIterations = hash_iterations;
+      CreatedAt      = created_at;
+    }
+}

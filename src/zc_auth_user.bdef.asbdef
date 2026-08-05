@@ -1,0 +1,9 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_AUTH_USER alias User
+{
+  use delete;
+  use action register;
+  use action login;
+}

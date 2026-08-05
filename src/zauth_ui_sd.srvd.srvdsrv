@@ -1,0 +1,5 @@
+@EndUserText.label: ' Service Definition for ZAUTH_LRN'
+define service ZAUTH_UI_SD {
+  expose ZC_AUTH_USER as User;
+  expose ZC_AUTH_SESS as Session;
+}
