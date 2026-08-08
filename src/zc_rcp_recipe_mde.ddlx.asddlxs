@@ -1,0 +1,55 @@
+@Metadata.layer: #CORE
+@UI.headerInfo:{
+    typeName:       'Recipe',
+    typeNamePlural: 'Recipes',
+    title:{ type: #STANDARD, value: 'Title' }
+}
+annotate entity ZC_RCP_RECIPE with
+{
+
+  @UI.facet: [
+      {
+        id: 'RecipeDetails', purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE, label: 'Recipe Details',
+        position: 10, targetQualifier: 'RecipeDetails'
+      },
+      {
+        id: 'Ingredients', purpose: #STANDARD,
+        type: #LINEITEM_REFERENCE, label: 'Ingredients',
+        position: 20, targetElement: '_Ingredient'
+      },
+      {
+        id: 'Steps', purpose: #STANDARD,
+        type: #LINEITEM_REFERENCE, label: 'Steps',
+        position: 30, targetElement: '_Step'
+      }
+    ]
+
+  @UI.lineItem:       [{ position: 10, label: 'Title' }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.fieldGroup:     [{ qualifier: 'RecipeDetails', position: 10, label: 'Title' }]
+  Title;
+
+  @UI.lineItem:   [{ position: 20, label: 'Servings' }]
+  @UI.fieldGroup: [{ qualifier: 'RecipeDetails', position: 20, label: 'Base Servings' }]
+  Servings;
+
+  @UI.lineItem:   [{ position: 30, label: 'Multiplier' }]
+  @UI.fieldGroup: [{ qualifier: 'RecipeDetails', position: 30, label: 'Servings Multiplier (2 = double)' }]
+  ServingsMultiplier;
+
+  @UI.fieldGroup: [{ qualifier: 'RecipeDetails', position: 40, label: 'Description' }]
+  Description;
+
+  @UI.fieldGroup: [{ qualifier: 'RecipeDetails', position: 50, label: 'Prep Time (min)' }]
+  PrepMinutes;
+
+  @UI.fieldGroup: [{ qualifier: 'RecipeDetails', position: 60, label: 'Cook Time (min)' }]
+  CookMinutes;
+
+  @UI.hidden: true
+  UserUuid;
+
+  @UI.hidden: true
+  CreatedAt;
+}

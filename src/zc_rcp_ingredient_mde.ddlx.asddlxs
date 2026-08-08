@@ -1,0 +1,33 @@
+@Metadata.layer: #CORE
+annotate entity ZC_RCP_INGREDIENT with
+{
+  @UI.lineItem: [{ position: 10, label: 'Ingredient' }]
+  IngredientName;
+
+  @UI.lineItem: [{ position: 20, label: 'Qty' }]
+  Quantity;
+
+  @UI.lineItem: [{ position: 30, label: 'Unit' }]
+  UnitCode;
+
+  @UI.lineItem: [{ position: 40, label: 'Density (g/ml)' }]
+  Density;
+
+  @UI.lineItem: [{ position: 50, label: 'Scaled Qty' }]
+  ScaledQuantity;
+
+  @UI.lineItem: [{ position: 60, label: 'Convert to' }]
+  TargetUnitCode;
+
+  @UI.lineItem: [{ position: 70, label: 'Converted' }]
+  ConvertedQuantity;
+
+  @UI.lineItem: [
+      { position: 80, label: 'Have it?' },
+      { position: 90, label: 'Have It Toggle', type: #FOR_ACTION, dataAction: 'toggleObtained' }
+    ]
+  IsObtained;
+
+  @UI.hidden: true
+  SortOrder;
+}

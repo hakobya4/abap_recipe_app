@@ -1,0 +1,9 @@
+@Metadata.layer: #CORE
+annotate entity ZC_RCP_STEP with
+{
+  @UI.lineItem: [{ position: 10, label: '#' }]
+  StepNumber;
+
+  @UI.lineItem: [{ position: 20, label: 'Instruction' }]
+  Instruction;
+}

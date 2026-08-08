@@ -1,0 +1,5 @@
+projection;
+strict ( 2 );
+define behavior for ZC_RCP_UOM alias UnitOfMeasure
+{
+}

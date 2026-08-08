@@ -1,0 +1,7 @@
+@EndUserText.label: 'Service Definition for Recipe App'
+define service ZRCP_UI_SD {
+  expose ZC_RCP_RECIPE     as Recipe;
+  expose ZC_RCP_INGREDIENT as Ingredient;
+  expose ZC_RCP_STEP       as Step;
+  expose ZC_RCP_UOM        as UnitOfMeasure;
+}

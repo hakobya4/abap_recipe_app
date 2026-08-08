@@ -1,0 +1,20 @@
+managed implementation in class ZBP_I_RCP_UOM unique;
+strict ( 2 );
+
+define behavior for ZI_RCP_UOM alias UnitOfMeasure
+persistent table zrcp_uom
+lock master
+authorization master ( global )
+{
+
+
+  field ( readonly ) UnitCode;
+
+  mapping for zrcp_uom
+    {
+      UnitCode     = unit_code;
+      UnitText     = unit_text;
+      Category     = category;
+      FactorToBase = factor_to_base;
+    }
+}

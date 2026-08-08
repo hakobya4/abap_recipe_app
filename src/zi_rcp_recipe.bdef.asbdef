@@ -1,0 +1,91 @@
+managed implementation in class ZBP_I_RCP_RECIPE unique;
+strict ( 2 );
+with draft;
+with cross associations;
+define behavior for ZI_RCP_RECIPE alias Recipe
+persistent table zrcp_recipe
+draft table zrcp_recipe_d
+lock master total etag LastChangedAt
+authorization master ( global )
+{
+  create;
+  update;
+  delete;
+  draft action Edit;
+  draft action Resume;
+  draft action Discard;
+  draft action Activate optimized;
+  draft determine action Prepare;
+  determination prepare_ingredients on save { create; update; }
+  field ( readonly, numbering : managed ) RecipeUuid;
+  field ( readonly ) CreatedAt, LastChangedAt;
+  field ( mandatory ) Title, UserUuid;
+
+  association _Ingredient { create; with draft; }
+  association _Step       { create; with draft; }
+  mapping for zrcp_recipe
+    {
+      RecipeUuid          = recipe_uuid;
+      UserUuid             = user_uuid;
+      Title                = title;
+      Description          = description;
+      Servings             = servings;
+      ServingsMultiplier   = servings_multiplier;
+      PrepMinutes          = prep_minutes;
+      CookMinutes          = cook_minutes;
+      CreatedAt            = created_at;
+      LastChangedAt        = last_changed_at;
+    }
+}
+define behavior for ZI_RCP_INGREDIENT alias Ingredient
+persistent table zrcp_ingredient
+draft table zrcp_ingredientd
+lock dependent by _Recipe
+authorization dependent by _Recipe
+{
+  update;
+  delete;
+  field ( readonly, numbering : managed ) IngredientUuid;
+  field ( readonly ) RecipeUuid;
+  field ( readonly ) ScaledQuantity, ConvertedQuantity, IsObtained;
+  field ( mandatory ) IngredientName, Quantity, UnitCode;
+  association _Recipe { with draft; }
+  association _Uom;
+  association _TargetUom;
+  action toggleObtained result [1] $self;
+
+  mapping for zrcp_ingredient
+    {
+      IngredientUuid    = ingredient_uuid;
+      RecipeUuid        = recipe_uuid;
+      SortOrder         = sort_order;
+      IngredientName    = ingredient_name;
+      Quantity          = quantity;
+      UnitCode          = unit_code;
+      Density           = density;
+      IsObtained        = is_obtained;
+      TargetUnitCode    = target_unit_code;
+      ScaledQuantity    = scaled_quantity;
+      ConvertedQuantity = converted_quantity;
+    }
+}
+define behavior for ZI_RCP_STEP alias Step
+persistent table zrcp_step
+draft table zrcp_step_d
+lock dependent by _Recipe
+authorization dependent by _Recipe
+{
+  update;
+  delete;
+  field ( readonly, numbering : managed ) StepUuid;
+  field ( readonly ) RecipeUuid;
+  field ( mandatory ) StepNumber, Instruction;
+  association _Recipe { with draft; }
+  mapping for zrcp_step
+    {
+      StepUuid    = step_uuid;
+      RecipeUuid  = recipe_uuid;
+      StepNumber  = step_number;
+      Instruction = instruction;
+    }
+}
