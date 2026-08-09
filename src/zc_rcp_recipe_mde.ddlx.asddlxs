@@ -47,6 +47,11 @@ annotate entity ZC_RCP_RECIPE with
   @UI.fieldGroup: [{ qualifier: 'RecipeDetails', position: 60, label: 'Cook Time (min)' }]
   CookMinutes;
 
+  @UI.lineItem: [
+      { position: 5, label: 'Import from URL', type: #FOR_ACTION, dataAction: 'importFromUrl' }
+    ]
+  RecipeUuid;
+
   @UI.hidden: true
   UserUuid;
 

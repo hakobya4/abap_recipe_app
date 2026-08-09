@@ -21,6 +21,8 @@ authorization master ( global )
   field ( readonly ) CreatedAt, LastChangedAt;
   field ( mandatory ) Title, UserUuid;
 
+  static action importFromUrl parameter ZI_RCP_IMPORT_P result [1] $self;
+
   association _Ingredient { create; with draft; }
   association _Step       { create; with draft; }
   mapping for zrcp_recipe

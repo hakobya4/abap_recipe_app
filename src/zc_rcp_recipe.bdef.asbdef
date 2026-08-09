@@ -14,6 +14,8 @@ define behavior for ZC_RCP_RECIPE alias Recipe
   use action Discard;
   use action Prepare;
 
+  use action importFromUrl;
+
   use association _Ingredient { create; with draft; }
   use association _Step { create; with draft; }
 }

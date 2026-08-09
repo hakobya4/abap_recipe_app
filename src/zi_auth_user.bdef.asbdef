@@ -15,7 +15,7 @@ authorization master ( global )
   field ( mandatory ) Username;
 
   static action register parameter ZI_AUTH_REGISTER_P result [1] $self;
-  static action login    parameter ZI_AUTH_LOGIN_P    result [1] $self;
+  static action login    parameter ZI_AUTH_LOGIN_P    result [1] ZI_AUTH_LOGIN_RESULT_P;
 
   mapping for zauth_user
     {
