@@ -175,15 +175,22 @@ CLASS lhc_User IMPLEMENTATION.
             CreatedAt = lv_now
             ExpiresAt = utclong_add( val = lv_now minutes = 30 )
           ) )
+        MAPPED   DATA(ls_sess_mapped)
         REPORTED DATA(reported_sess)
         FAILED   DATA(failed_sess).
+
+      " numbering is managed, so we only get the real SessionUuid back via MAPPED
+      DATA(lv_session_uuid) = COND sysuuid_x16(
+                                 WHEN lines( ls_sess_mapped-session ) > 0
+                                 THEN ls_sess_mapped-session[ 1 ]-%pky-SessionUuid ).
 
       APPEND VALUE #(
         %cid   = <key>-%cid
         %param = VALUE #(
-                   UserUuid  = ls_user-user_uuid
-                   Username  = ls_user-username
-                   CreatedAt = ls_user-created_at
+                   UserUuid    = ls_user-user_uuid
+                   Username    = ls_user-username
+                   CreatedAt   = ls_user-created_at
+                   SessionUuid = lv_session_uuid
                  )
       ) TO result.
 

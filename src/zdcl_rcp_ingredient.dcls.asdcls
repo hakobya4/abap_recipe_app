@@ -1,0 +1,6 @@
+@EndUserText.label: 'Ingredient row-level access - owner only'
+@MappingRole: true
+define role ZDCL_RCP_INGREDIENT {
+  grant select on ZI_RCP_INGREDIENT
+    where _Recipe.UserUuid = $session.user;
+}

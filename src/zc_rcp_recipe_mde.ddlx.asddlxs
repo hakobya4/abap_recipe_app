@@ -48,6 +48,7 @@ annotate entity ZC_RCP_RECIPE with
   CookMinutes;
 
   @UI.lineItem: [
+      { position: 4, label: 'New Recipe', type: #FOR_ACTION, dataAction: 'createRecipe' },
       { position: 5, label: 'Import from URL', type: #FOR_ACTION, dataAction: 'importFromUrl' }
     ]
   RecipeUuid;

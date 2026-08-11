@@ -1,31 +1,26 @@
 projection;
 strict ( 2 );
-use draft;
 
 define behavior for ZC_RCP_RECIPE alias Recipe
 {
-  use create;
-  use update;
-  use delete;
 
-  use action Edit;
-  use action Resume;
-  use action Activate;
-  use action Discard;
-  use action Prepare;
 
   use action importFromUrl;
+  use action createRecipe;
+  use action updateRecipe;
+  use action deleteRecipe;
 
-  use association _Ingredient { create; with draft; }
-  use association _Step { create; with draft; }
+
+  use association _Ingredient;
+  use association _Step;
 }
 
 define behavior for ZC_RCP_INGREDIENT alias Ingredient
 {
-  use update;
-  use delete;
-
-  use association _Recipe { with draft; }
+  use action addIngredient;
+  use action updateIngredient;
+  use action deleteIngredient;
+  use association _Recipe;
   use association _Uom;
   use association _TargetUom;
   use action toggleObtained;
@@ -36,9 +31,10 @@ define behavior for ZC_RCP_INGREDIENT alias Ingredient
 
 define behavior for ZC_RCP_STEP alias Step
 {
-  use update;
-  use delete;
 
-  use association _Recipe { with draft; }
+  use action addStep;
+  use action updateStep;
+  use action deleteStep;
+  use association _Recipe;
 
 }

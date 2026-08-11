@@ -1,0 +1,6 @@
+@EndUserText.label: 'Step row access'
+@MappingRole: true
+define role ZDCL_RCP_STEP {
+  grant select on ZI_RCP_STEP
+    where _Recipe.UserUuid = $session.user;
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'Recipe row access'
+@MappingRole: true
+define role ZDCL_RCP_RECIPE {
+  grant select on ZI_RCP_RECIPE
+    where UserUuid = $session.user;
+}
